@@ -1,10 +1,10 @@
-<h1>Sign up</h1>
+<h1>Log In</h1>
 
-<form action="<%= users_url %>" method="POST">
+<form action="<%= session_url %>" method="POST">
   <%= auth_token %>
   <input type="text" name="user[email]" placeholder="Email" autofocus/>
   <br />
   <input type="password" name="user[password]" placeholder="Password" />
   <br />
-  <input type="submit" value="Sign up" />
+  <input type="submit" value="Log In" />
 </form>

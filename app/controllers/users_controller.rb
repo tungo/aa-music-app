@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.password = params[:password]
+    # @user.password = params[:password]
 
     if @user.save
       log_in_user!(@user)
@@ -24,6 +24,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email)
+    params.require(:user).permit(:email, :password)
   end
 end

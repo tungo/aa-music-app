@@ -1,0 +1,11 @@
+<% if !flash.empty? %>
+<section style="color:red;">
+  <h3>Errors</h3>
+
+  <% flash.each do |key, value| %>
+  <p>
+    <%= value %>
+  </p>
+  <% end %>
+</section>
+<% end %>
