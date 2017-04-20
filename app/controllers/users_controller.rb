@@ -5,9 +5,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.password = params[:password]
+
     if @user.save
-      login!(user)
-      redirect_to users_url(@user)
+      log_in_user!(@user)
+      redirect_to user_url(@user)
     else
       flash.now[:errors] = "Can not create new user"
       render :new
@@ -22,6 +24,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user).permit(:email)
   end
 end
