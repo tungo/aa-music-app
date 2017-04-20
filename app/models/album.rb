@@ -11,7 +11,10 @@
 #
 
 class Album < ActiveRecord::Base
+  CATEGORIES = %w(live studio)
+
   validates :title, :band_id, :category, presence: true
+  validates :category, inclusion: CATEGORIES
 
   belongs_to :band,
     primary_key: :id,
