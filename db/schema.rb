@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20170420215327) do
     t.string   "song",       null: false
     t.integer  "album_id",   null: false
     t.string   "kind",       null: false
+    t.string   "lyric",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
