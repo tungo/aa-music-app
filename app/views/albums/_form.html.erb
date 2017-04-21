@@ -1,0 +1,31 @@
+<% action_url = @album.persisted? ? album_url(@album) : albums_url %>
+<% method = @album.persisted? ? "<input type='hidden' title='_method' value='PATCH' />".html_safe : '' %>
+<% submit_button = @album.persisted? ? 'Update album' : 'Create album' %>
+<% band_id = @album.persisted? ? @album.band_id : params[:band_id].to_i %>
+
+<form action="<%= action_url %>" method="post">
+  <%= method %>
+  <%= auth_token %>
+  <label for="album_title">Title: </label>
+  <input type="text" name="album[title]" id="album_title" autofocus value="<%= @album.title %>" />
+  <br />
+
+  <label for="album_band">Band: </label>
+  <select name="album[band_id]" id="album_band">
+    <% Band.all.each do |band| %>
+      <% band_selected = band.id == band_id ? "selected" : "" %>
+      <option value="<%= band.id %>" <%= band_selected %>><%= band.name %></option>
+    <% end %>
+  </select>
+  <br />
+
+  <label for="album_category">Category: </label>
+  <br />
+  <% Album::CATEGORIES.each do |cat| %>
+    <label for="album_category_<%= cat %>"><%= cat.capitalize %></label>
+    <input type="radio" id="album_category_<%= cat %>" name="album[category]" value="<%= cat %>">
+  <% end %>
+  <br />
+
+  <input type="submit" value="<%= submit_button %>" />
+</form>

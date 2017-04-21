@@ -52,7 +52,7 @@ class BandsController < ApplicationController
 
   def destroy
     @band = Band.find(params[:id])
-    if @band.delete
+    if @band.destroy
       redirect_to bands_url
     else
       flash[:errors] = 'Can not find this band'

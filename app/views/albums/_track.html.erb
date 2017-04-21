@@ -1,0 +1,8 @@
+
+<ul>
+  <% tracks.each do |track| %>
+    <li>
+      <%= link_to track.song, track_url(track) %>
+    </li>
+  <% end %>
+</ul>

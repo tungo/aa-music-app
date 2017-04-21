@@ -1,0 +1,13 @@
+<h1>Album: <%= @album.title %></h1>
+
+Band: <%= link_to @album.band.name , band_url(@album.band_id) %>
+<br /><br />
+
+<%= button_to "Edit", edit_album_url(@album), method: :get %>
+<br />
+<%= button_to "Destroy", album_url(@album), method: :delete %>
+<br />
+
+<h3>Tracks</h3>
+<%#= link_to "Add album", new_band_album_url %>
+<%= render "track", tracks: @album.tracks %>
