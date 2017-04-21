@@ -1,7 +1,8 @@
 <% action_url = @album.persisted? ? album_url(@album) : albums_url %>
-<% method = @album.persisted? ? "<input type='hidden' title='_method' value='PATCH' />".html_safe : '' %>
+<% method = @album.persisted? ? "<input type='hidden' name='_method' value='PATCH' />".html_safe : '' %>
 <% submit_button = @album.persisted? ? 'Update album' : 'Create album' %>
 <% band_id = @album.persisted? ? @album.band_id : params[:band_id].to_i %>
+<% category = @album.persisted? ? @album.category : '' %>
 
 <form action="<%= action_url %>" method="post">
   <%= method %>
@@ -22,8 +23,9 @@
   <label for="album_category">Category: </label>
   <br />
   <% Album::CATEGORIES.each do |cat| %>
+    <% category_checked = category == cat ? "checked" : "" %>
     <label for="album_category_<%= cat %>"><%= cat.capitalize %></label>
-    <input type="radio" id="album_category_<%= cat %>" name="album[category]" value="<%= cat %>">
+    <input type="radio" id="album_category_<%= cat %>" name="album[category]" value="<%= cat %>" <%= category_checked %>>
   <% end %>
   <br />
 

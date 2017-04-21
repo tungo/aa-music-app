@@ -1,0 +1,38 @@
+<% action_url = @track.persisted? ? track_url(@track) : tracks_url %>
+<% method = @track.persisted? ? "<input type='hidden' name='_method' value='PATCH' />".html_safe : '' %>
+<% submit_button = @track.persisted? ? 'Update track' : 'Create track' %>
+<% album_id = @track.persisted? ? @track.album_id : params[:album_id].to_i %>
+<% kind_id = @track.persisted? ? @track.kind : '' %>
+
+<form action="<%= action_url %>" method="post">
+  <%= method %>
+  <%= auth_token %>
+
+  <label for="track_song">Song: </label>
+  <input type="text" name="track[song]" id="track_song" autofocus value="<%= @track.song %>" />
+  <br />
+
+  <label for="track_album">Album: </label>
+  <select name="track[album_id]" id="track_album">
+    <% Album.all.each do |album| %>
+      <% album_selected = album.id == album_id ? "selected" : "" %>
+      <option value="<%= album.id %>" <%= album_selected %>><%= album.title %></option>
+    <% end %>
+  </select>
+  <br />
+
+  <label for="track_kind">Kind: </label>
+  <br />
+  <% Track::KINDS.each do |kind| %>
+    <% kind_checked = kind_id == kind ? "checked" : "" %>
+    <label for="track_kind_<%= kind %>"><%= kind.capitalize %></label>
+    <input type="radio" id="track_kind_<%= kind %>" name="track[kind]" value="<%= kind %>" <%= kind_checked %>>
+  <% end %>
+  <br />
+
+  <label for="track_lyric">Lyric: </label>
+  <textarea name="track[lyric]" id="track_lyric"><%= @track.lyric %></textarea>
+  <br />
+
+  <input type="submit" value="<%= submit_button %>" />
+</form>

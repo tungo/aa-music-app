@@ -12,10 +12,10 @@
 #
 
 class Track < ActiveRecord::Base
-  KIND = %w(bonus regular)
+  KINDS = %w(bonus regular)
 
   validates :song, :album_id, :kind, presence: true
-  validates :kind, inclusion: KIND
+  validates :kind, inclusion: KINDS
 
   belongs_to :album,
     primary_key: :id,

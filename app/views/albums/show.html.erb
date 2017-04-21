@@ -1,6 +1,8 @@
 <h1>Album: <%= @album.title %></h1>
 
 Band: <%= link_to @album.band.name , band_url(@album.band_id) %>
+<br />
+Category: <%= @album.category %>
 <br /><br />
 
 <%= button_to "Edit", edit_album_url(@album), method: :get %>
@@ -9,5 +11,5 @@ Band: <%= link_to @album.band.name , band_url(@album.band_id) %>
 <br />
 
 <h3>Tracks</h3>
-<%#= link_to "Add album", new_band_album_url %>
+<%= link_to "Add track", new_album_track_url(@album) %>
 <%= render "track", tracks: @album.tracks %>
